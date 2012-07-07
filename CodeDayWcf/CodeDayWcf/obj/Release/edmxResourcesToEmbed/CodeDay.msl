@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="codeDayModelStoreContainer" CdmEntityContainer="codeDayEntities">
+    <EntitySetMapping Name="CD_Codes">
+      <EntityTypeMapping TypeName="codeDayModel.CD_Codes">
+        <MappingFragment StoreEntitySet="CD_Codes">
+          <ScalarProperty Name="CodeID" ColumnName="CodeID" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ScanTime" ColumnName="ScanTime" />
+          <ScalarProperty Name="IMEI" ColumnName="IMEI" />
+          <ScalarProperty Name="Points" ColumnName="Points" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CD_Users">
+      <EntityTypeMapping TypeName="codeDayModel.CD_Users">
+        <MappingFragment StoreEntitySet="CD_Users">
+          <ScalarProperty Name="IMEI" ColumnName="IMEI" />
+          <ScalarProperty Name="Nickname" ColumnName="Nickname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_Scoreboard">
+      <EntityTypeMapping TypeName="codeDayModel.vw_Scoreboard">
+        <MappingFragment StoreEntitySet="vw_Scoreboard">
+          <ScalarProperty Name="IMEI" ColumnName="IMEI" />
+          <ScalarProperty Name="Nickname" ColumnName="Nickname" />
+          <ScalarProperty Name="TotalScore" ColumnName="TotalScore" />
+          <ScalarProperty Name="TotalScans" ColumnName="TotalScans" />
+          <ScalarProperty Name="LastScanTime" ColumnName="LastScanTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

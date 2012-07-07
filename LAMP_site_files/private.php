@@ -1,0 +1,1 @@
+<?php echo ('IMEI: '.$_GET['imei'].' Code: '.$_GET['code']); ?>

@@ -1,0 +1,5 @@
+c:\users\sunflash\documents\visual studio 2010\Projects\CodeDayWcf\CodeDayWcf\bin\CodeDayWcf.dll
+c:\users\sunflash\documents\visual studio 2010\Projects\CodeDayWcf\CodeDayWcf\bin\CodeDayWcf.pdb
+c:\users\sunflash\documents\visual studio 2010\Projects\CodeDayWcf\CodeDayWcf\obj\Debug\ResolveAssemblyReference.cache
+c:\users\sunflash\documents\visual studio 2010\Projects\CodeDayWcf\CodeDayWcf\obj\Debug\CodeDayWcf.dll
+c:\users\sunflash\documents\visual studio 2010\Projects\CodeDayWcf\CodeDayWcf\obj\Debug\CodeDayWcf.pdb

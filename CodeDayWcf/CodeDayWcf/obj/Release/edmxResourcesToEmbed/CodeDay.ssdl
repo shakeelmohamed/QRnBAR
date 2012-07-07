@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="codeDayModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="codeDayModelStoreContainer">
+    <EntitySet Name="CD_Codes" EntityType="codeDayModel.Store.CD_Codes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CD_Users" EntityType="codeDayModel.Store.CD_Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="vw_Scoreboard" EntityType="codeDayModel.Store.vw_Scoreboard" store:Type="Views" store:Schema="dbo" store:Name="vw_Scoreboard">
+      <DefiningQuery>SELECT 
+      [vw_Scoreboard].[IMEI] AS [IMEI], 
+      [vw_Scoreboard].[Nickname] AS [Nickname], 
+      [vw_Scoreboard].[TotalScore] AS [TotalScore], 
+      [vw_Scoreboard].[TotalScans] AS [TotalScans], 
+      [vw_Scoreboard].[LastScanTime] AS [LastScanTime]
+      FROM [dbo].[vw_Scoreboard] AS [vw_Scoreboard]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+  <EntityType Name="CD_Codes">
+    <Key>
+      <PropertyRef Name="CodeID" />
+    </Key>
+    <Property Name="CodeID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="ScanTime" Type="datetime" Nullable="false" />
+    <Property Name="IMEI" Type="nvarchar" Nullable="false" MaxLength="16" />
+    <Property Name="Points" Type="int" />
+  </EntityType>
+  <EntityType Name="CD_Users">
+    <Key>
+      <PropertyRef Name="IMEI" />
+    </Key>
+    <Property Name="IMEI" Type="nvarchar" Nullable="false" MaxLength="16" />
+    <Property Name="Nickname" Type="nvarchar" Nullable="false" MaxLength="128" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'SQL2008R2_860697_raveradar.dbo.vw_Scoreboard' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="vw_Scoreboard">
+    <Key>
+      <PropertyRef Name="IMEI" />
+    </Key>
+    <Property Name="IMEI" Type="nvarchar" Nullable="false" MaxLength="16" />
+    <Property Name="Nickname" Type="nvarchar" MaxLength="128" />
+    <Property Name="TotalScore" Type="int" />
+    <Property Name="TotalScans" Type="int" />
+    <Property Name="LastScanTime" Type="datetime" />
+  </EntityType>
+</Schema>

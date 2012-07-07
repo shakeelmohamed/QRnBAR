@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+    <TableLayout 
+        android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:stretchColumns="1">
+		<Button 
+		    android:id="@+id/viewScoreboard"
+		    android:text="View Scoreboard"
+		    android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:gravity="center_horizontal|top"/>
+    <TextView 
+        android:id="@+id/scanPageText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+    <LinearLayout
+		android:orientation="vertical" 
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content"
+		android:id="@+id/nicknameLayout"
+		android:gravity="center_horizontal">
+		    <EditText
+		        android:id="@+id/nicknameField"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content" 
+		        android:hint="Enter a Nickname" />
+		    <Button
+		        android:id="@+id/saveNickname"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:text="Save Nickname" 
+		        android:singleLine="true" />
+	</LinearLayout>
+    <Button
+        android:id="@+id/startScan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scan a code!" />
+    <TextView 
+        android:id="@+id/scanPageText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/dashboard"
+        android:gravity="fill_horizontal|bottom">
+	    <TextView
+	        android:id="@+id/nicknameLabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text=""/>
+
+	    <RelativeLayout
+	        android:layout_weight="20"
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent">
+	        <TextView
+	        android:id="@+id/nicknameSpacer"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="  Score:" />
+	    </RelativeLayout>
+	    <TextView
+	        android:id="@+id/scoreLabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text=""
+	        android:gravity="left" />
+
+    </LinearLayout>
+    </TableLayout>
+</LinearLayout>
