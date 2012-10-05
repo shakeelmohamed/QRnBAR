@@ -1,5 +1,5 @@
 <?php
-	$projectName = "QRnBAR Leaderboard";
+	$projectName = "QRnBAR";
 	$scoreBoardURL = 'http://raveradar.com/codedaysvc.svc/GetScoreboard';
 ?>
 <head>
@@ -19,6 +19,7 @@
 			color: #E62E00;
 			padding: 10px;
 			font-size: 24px;
+			list-style-type: none;
 		}
 		#scoreBoardContainer {
 			margin-left: auto;
@@ -30,20 +31,28 @@
 		}
 		.scoreHeader {
 			color: #1177FF;
-			width: 65px;
+			/*width: 65px;*/
 			font-size: 16px;
 			font-weight: bold;
+			list-style-type: none;
 			border-bottom: thin solid #1177FF;
+		}
+		.scoreHeader span{
+			width: auto;
+			padding-right: 64px;
 		}
 		.scoreData {
 			padding-right: 64px;
+			display: table-cell;
 		}
+		h1 {margin: 50 0 0 100;}
+		p {margin: 10 500 0 130;}
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script>
 	function pullJSON(){
 		var queryURL = 'select * from json where url="<?php echo $scoreBoardURL; ?>"';
-		jQuery.ajax({
+		$.ajax({
 			url: 'http://query.yahooapis.com/v1/public/yql', //Using Yahoo's YQL to do cross-domain requests
 			data: {
 				q: queryURL, //set the URL here
@@ -83,6 +92,65 @@
 			}
 		});
 	}
+	function pullJSONsexy(){
+		var queryURL = 'select * from json where url="<?php echo $scoreBoardURL; ?>"';
+		$.ajax({
+			url: 'http://query.yahooapis.com/v1/public/yql', //Using Yahoo's YQL to do cross-domain requests
+			data: {
+				q: queryURL, //set the URL here
+				format: 'json'
+			},
+			dataType: 'JSON',
+			success: function(data){
+				var response = data.query.results.json;
+				var count = 0;
+				
+				var htmlOutput = "";
+				htmlOutput += "<li class='scoreHeader'>";
+					htmlOutput += "<span>Place</span>";
+					htmlOutput += "<span>Nickname</span>";
+					htmlOutput += "<span>Score</span>";
+					htmlOutput += "<span>Scans</span>";
+					htmlOutput += "<span>Last Updated</span>";
+				htmlOutput += "</li>";
+				
+				for(var i in response){
+					var b = response[i];
+					for(var index in b){
+						var item = b[index];
+						count ++; //This should be placed where it can count up the number of entried pulled in from the database
+						htmlOutput += '<li id="'+item.ID+'" class="scoreEntry">';
+							htmlOutput += '<span class="scoreData_position">'+item.Position+' </span>';
+							htmlOutput += '<span class="scoreData_nickname">'+item.Nickname+' </span>';
+							htmlOutput += '<span class="scoreData_score">'+item.Score+' </span>';
+							htmlOutput += '<span class="scoreData_scans">'+item.Scans+' </span>';
+							htmlOutput += '<span class="scoreData_time">'+ getTimeSinceNowStr(parseTime(item.LastUpdated))+'</span>';
+						htmlOutput += '</li>';
+					}
+				}
+				if(htmlOutput.length>0){
+					$('#scoreBoardTableSexy').html(htmlOutput);
+					var listOfSpans = ['position', 'nickname', 'score', 'scans', 'time'];
+					for(var s in listOfSpans){
+						fixSpanWidth(listOfSpans[s]);
+					}
+				}
+			}
+		});
+	}
+	function fixSpanWidth(className){
+		//This doesn't seem to work at all
+		className = '.scoreData_'+className;
+		var max = 0;
+		$(className).each(function(){
+			if(max < $(this).width()){
+				max = $(this).width();
+			}
+		});
+		$(className).each(function(){
+			$(this).width(max);
+		});
+	}
 	function getTimeSinceNowStr(from){
 		var today = new Date();
 		var ms = today - from;
@@ -107,10 +175,9 @@
 			}
 		}
 		else {
-			msg = "Just Now"
+			//msg = "Just Now";
+			return "Just Now";
 		}
-		
-		//return String(fixMonth(parseInt(input.getMonth()))+" "+input.getDate()+", "+input.getFullYear()+" "+fixTime(parseInt(input.getHours()), parseInt(input.getMinutes())));
 		return msg + " ago.";
 	}
 	function parseTime(input){
@@ -156,15 +223,15 @@
 			hrs = 12;
 		return hrs+":"+mins+" am";
 	}
-	jQuery(document).ready(function(){
+	$(document).ready(function(){
 		pullJSON();
+		//pullJSONsexy(); not working
 		window.setInterval(function(){
 			pullJSON();
 		}, 1000);
 	});
 	</script>
 </head>
-
 <div class="navbar navbar-fixed-top">
 	<div class="navbar-inner">
 	    <div class="container">
@@ -173,17 +240,20 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 			</a>
-			<a class="brand" href="#"><?php echo $projectName; ?></a>
+			<a class="brand" href="index.php"><?php echo $projectName; ?></a>
 			<div class="nav-collapse">
 				<ul class="nav">
-					<li class="active"><a href="#">Home</a></li>
+					<li class="active"><a href="index.php">Home</a></li>
+					<li class="inactive"><a href="about.php">About</a></li>
             	</ul>
 			</div>
 		</div>
 	</div>
-	
+	<h1>Leaderboard:</h1>
 	<div id="scoreBoardContainer">
 		<table id="scoreBoardTable">
 		</table>
+		<ul id="scoreBoardTableSexy">
+		</ul>
 	</div>
 </div>
